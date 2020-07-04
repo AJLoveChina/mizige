@@ -8,88 +8,45 @@
     <title>米字格</title>
     <link rel="stylesheet" href="./main.css">
 </head>
-<body>
+<body id="body">
+  <div style="width:300px;margin:40px auto 0;font-size:0;">
+      <div class="ci-box">
+          <div class="lt-2rb line"></div>
+          <div class="rt-2lb line"></div>
+          <div class="rm-2lm line"></div>
+          <div class="tm-2bm line"></div>
+          <div class="ci">
+              <span class="wd">米</span>
+          </div>
+      </div>
 
-<div style="width:300px;margin:40px auto 0;font-size:0;">
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">米</span>
-        </div>
-    </div>
+      <div class="ci-box">
+          <div class="lt-2rb line"></div>
+          <div class="rt-2lb line"></div>
+          <div class="rm-2lm line"></div>
+          <div class="tm-2bm line"></div>
+          <div class="ci">
+              <span class="wd">字</span>
+          </div>
+      </div>
 
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">字</span>
-        </div>
-    </div>
+      <div class="ci-box">
+          <div class="lt-2rb line"></div>
+          <div class="rt-2lb line"></div>
+          <div class="rm-2lm line"></div>
+          <div class="tm-2bm line"></div>
+          <div class="ci">
+              <span class="wd">格</span>
+          </div>
+      </div>
+  </div>
 
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">格</span>
-        </div>
-    </div>
-</div>
+  <input type="text" class="input" name="" value="" oninput="generate(this.value)" placeholder="输入一些文字试试：）">
+  字体大小：<input id='fontSize' onchange='changeFontSize(this.value)' type="range" min="30" max="400" value="50"  step="1"/>
 
-<div style="width:500px;margin:20px auto;font-size:0;">
 
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">唐</span>
-        </div>
-    </div>
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">诗</span>
-        </div>
-    </div>
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">三</span>
-        </div>
-    </div>
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">百</span>
-        </div>
-    </div>
-    <div class="ci-box">
-        <div class="lt-2rb line"></div>
-        <div class="rt-2lb line"></div>
-        <div class="rm-2lm line"></div>
-        <div class="tm-2bm line"></div>
-        <div class="ci">
-            <span class="wd">首</span>
-        </div>
-    </div>
 
+<div id='test-groud' style="margin:20px auto;font-size:0;">
 </div>
 
 <style>
@@ -98,16 +55,66 @@
         padding:0;
     }
     /*设置自定义css样式,  整体宽高, 字体大小*/
-    .ci-box{
-        width:96px!important;
-        height:96px!important;
-        margin: 0 2px;
+    #body .ci-box{
+        width:96px;
+        height:96px;
+        margin: 2px;
     }
 
-    .ci-box .wd {
-        font-size:90px!important;
+    #body .ci-box .wd {
+        font-size:90px;
     }
 </style>
+
+
+<style>
+  .input{
+      width:200px;
+      height:30px;
+      padding:5px;
+      margin:20px auto;
+      display: block;
+  }
+</style>
+
+<script type="text/javascript">
+  generate("唐诗三百首");
+
+   function generate(wenzi) {
+     let groud = document.getElementById('test-groud');
+     groud.innerHTML = "";
+
+     for (let item of wenzi) {
+       let div = document.createElement("div");
+       div.className = 'ci-box';
+       div.innerHTML = `<div class="lt-2rb line"></div>
+       <div class="rt-2lb line"></div>
+       <div class="rm-2lm line"></div>
+       <div class="tm-2bm line"></div>
+       <div class="ci">
+           <span class="wd">${item}</span>
+       </div>`;
+
+       groud.appendChild(div);
+     }
+
+   }
+
+   function changeFontSize(fontSize) {
+     let box = document.querySelectorAll("#test-groud .ci-box");
+     let wds = document.querySelectorAll('#test-groud .ci-box .wd');
+
+     for (let b of box) {
+       b.style.width = `${fontSize * 1.2}px`;
+       b.style.height = `${fontSize* 1.2}px`;
+
+     }
+
+     for (let wd of wds) {
+       wd.style.fontSize = `${fontSize}px`;
+     }
+   }
+</script>
 
 </body>
 </html>
